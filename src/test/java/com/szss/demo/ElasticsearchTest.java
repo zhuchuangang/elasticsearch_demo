@@ -2,7 +2,6 @@ package com.szss.demo;
 
 import com.szss.demo.entities.Message;
 import com.szss.demo.repository.MessageRepository;
-import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +29,13 @@ public class ElasticsearchTest {
 
     @Test
     public void testSave() {
-        Message m = new Message(1L, "Chuangang Zhu", "大家早上好！", new Date().getTime());
+        Message m = new Message(1L, "Chuangang Zhu", "大家早上好！", new Date());
         repository.save(m);
-        m = new Message(2L, "Wei Ji", "今天天气真好，我们出去玩吧！", new Date().getTime());
+        m = new Message(2L, "Wei Ji", "今天天气真好，我们出去玩吧！", new Date());
         repository.save(m);
-        m = new Message(3L, "Chuangang Zhu", "好呀，我也好久没有出去玩了，我们去哪里玩呢？去逛街还是去烧烤？", new Date().getTime());
+        m = new Message(3L, "Chuangang Zhu", "好呀，我也好久没有出去玩了，我们去哪里玩呢？去逛街还是去烧烤？", new Date());
         repository.save(m);
-        m = new Message(4L, "Wei Ji", "我们去逛街吧~~~", new Date().getTime());
+        m = new Message(4L, "Wei Ji", "我们去逛街吧~~~", new Date());
         repository.save(m);
     }
 

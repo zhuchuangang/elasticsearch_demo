@@ -3,6 +3,6 @@ server:
 spring:
   data:
     elasticsearch:
-      cluster-name: elasticsearch
-      cluster-nodes: localhost:9300
+      cluster-name: es
+      cluster-nodes: localhost:9300,localhost:9302
 

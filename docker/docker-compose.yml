@@ -1,0 +1,49 @@
+version: '2'
+services:
+  master:
+      build: ./elasticsearch
+      image: szss/elasticsearch:2.4.5
+      command: "elasticsearch -Des.cluster.name=es -Des.node.name=master -Des.node.master=true -Des.node.data=false"
+      environment:
+         - ES_HEAP_SIZE=512m
+      ports:
+        - "9200:9200"
+        - "9300:9300"
+
+  datanode01:
+      build: ./elasticsearch
+      image: szss/elasticsearch:2.4.5
+      command: "elasticsearch -Des.cluster.name=es -Des.node.name=datanode01 -Des.discovery.zen.ping.unicast.hosts=master"
+      links:
+        - master
+#      volumes:
+#        - "/opt/elasticsearch/data"
+      environment:
+         - ES_HEAP_SIZE=512m
+      ports:
+        - "9201:9200"
+        - "9301:9300"
+  datanode02:
+      build: ./elasticsearch
+      image: szss/elasticsearch:2.4.5
+      command: "elasticsearch -Des.cluster.name=es -Des.node.name=datanode02 -Des.discovery.zen.ping.unicast.hosts=master"
+      links:
+        - master
+#      volumes:
+#        - "/opt/elasticsearch/data"
+      environment:
+         - ES_HEAP_SIZE=512m
+      ports:
+        - "9202:9200"
+        - "9302:9300"
+  kibana:
+    build: ./kibana
+    image: szss/kibana:4.6.4
+#    volumes:
+#      - ./kibana/config/:/usr/share/kibana/config
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_URL=http://master:9200
+    links:
+      - master
