@@ -2,7 +2,7 @@ version: '2'
 services:
   master:
       build: ./elasticsearch
-      image: szss/elasticsearch:2.4.5
+      image: szss/elasticsearch:2.4.6
       command: "elasticsearch -Des.cluster.name=es -Des.node.name=master -Des.node.master=true -Des.node.data=false"
       environment:
          - ES_HEAP_SIZE=512m
@@ -12,7 +12,7 @@ services:
 
   datanode01:
       build: ./elasticsearch
-      image: szss/elasticsearch:2.4.5
+      image: szss/elasticsearch:2.4.6
       command: "elasticsearch -Des.cluster.name=es -Des.node.name=datanode01 -Des.discovery.zen.ping.unicast.hosts=master"
       links:
         - master
@@ -25,7 +25,7 @@ services:
         - "9301:9300"
   datanode02:
       build: ./elasticsearch
-      image: szss/elasticsearch:2.4.5
+      image: szss/elasticsearch:2.4.6
       command: "elasticsearch -Des.cluster.name=es -Des.node.name=datanode02 -Des.discovery.zen.ping.unicast.hosts=master"
       links:
         - master
